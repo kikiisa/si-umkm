@@ -53,6 +53,10 @@
                         <a class="nav-link" aria-current="page" href="{{Route('login')}}"><i class="fa fa-sign-in"></i>
                             LOGIN</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{Route('register')}}"><i class="fa fa-list"></i>
+                            REGISTER</a>
+                    </li>
                 </ul>
             </div>
         </div>

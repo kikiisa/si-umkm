@@ -6,8 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,17 +28,21 @@ Route::get('/',[HomeController::class,'index'])->name('honme');
 Route::get('/category/{id}',[HomeController::class,'category'])->name('category');
 Route::get('/all-category',[HomeController::class,'category_all'])->name('category.all');
 
+Route::get('/jenis-umkm/{id}',[HomeController::class,'umkm'])->name('umkm');
 
 Route::get('/product/{id}',[HomeController::class,'product'])->name('product');
 Route::get('/product',[HomeController::class,'all_product'])->name('product.all');
 
 Route::get('/search',[HomeController::class,'search'])->name('search');
 
+Route::get('/toko/{id}',[HomeController::class,'toko'])->name('toko');
 
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login',[LoginController::class,'store'])->name('login.store');
 Route::get('/logout',[LoginController::class,'logout'])->name('login.logout');
 
+Route::get('/register',[RegisterController::class,'index'])->name('register');
+Route::post('/register',[RegisterController::class,'store'])->name('register.store');
 
 Route::get('/tentang-kami',[HomeController::class,'about'])->name('about');
 
@@ -51,7 +57,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/profile',[ProfileController::class,'index'])->name('profile');
         Route::put('/profile',[ProfileController::class,'update'])->name('profile.update');
         Route::put('/profile-password',[ProfileController::class,'updatePassword'])->name('profile.password');
-        
+        Route::resource('user',UserController::class);        
     });
 });
 

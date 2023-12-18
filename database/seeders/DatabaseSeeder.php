@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\JenisUmkm;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,8 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // UserSeeder::class
-            SettingSeeder::class
+            UserSeeder::class,
+            SettingSeeder::class,
+            KategoriSeeder::class,
+            JenisUmkmSeeder::class
         ]);
     }
 }

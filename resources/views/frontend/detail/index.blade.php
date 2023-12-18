@@ -29,7 +29,6 @@
                         <a href="https://wa.me/{{ $data->phone }}?text=Saya%20tertarik%20dengan%20produk%20{{ $data->name }}" class="btn btn-success">
                             <i class="fab fa-whatsapp"></i> Pesan Via WhatsApp
                         </a>
-                        
                     </div>
                 </div>
             </div>

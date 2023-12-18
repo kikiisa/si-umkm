@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+    private $path = "data/profile/";
     /**
      * Display a listing of the resource.
      *
@@ -95,15 +97,68 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = User::find(Auth::user()->id);
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-        ]);
-        $user->update($request->all());
-        if($user) {
-            return redirect()->back()->with('success', 'Data berhasil diubah!');
+        if(Auth::user()->role == 'admin')
+        {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+            ]);
+            $user->update($request->all());
+            if($user) {
+                return redirect()->back()->with('success', 'Data berhasil diubah!');
+            }else{
+                return redirect()->back()->with('error', 'Data gagal diubah!');
+            }
         }else{
-            return redirect()->back()->with('error', 'Data gagal diubah!');
+            if($request->hasFile('file'))
+            {
+                $image = $request->file('file');
+                $nameImage = $image->hashName();
+                $image->move($this->path,$nameImage);
+                File::delete($user->profile);
+                $request->validate([
+                    'name' => 'required',
+                    'email' => 'required|email',
+                    'phone' => 'required',
+                    'alamat' => 'required',
+                    'deskripsi' => 'required',
+                    'profile' => 'mimes:jpg,jpeg,png|max:2048',
+                ]);
+                $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'alamat' => $request->alamat,
+                    'deskripsi' => $request->deskripsi,
+                    'profile' => $this->path . $nameImage,
+                ]);
+                if($user) {
+                    return redirect()->back()->with('success', 'Data berhasil diubah!');
+                }else{
+                    return redirect()->back()->with('error', 'Data gagal diubah!');
+                }
+            }else{
+                $request->validate([
+                    'name' => 'required',
+                    'email' => 'required|email',
+                    'phone' => 'required',
+                    'alamat' => 'required',
+                    'deskripsi' => 'required',
+                  
+                ]);
+                $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
+                    'alamat' => $request->alamat,
+                    'deskripsi' => $request->deskripsi,
+                ]);
+                if($user) {
+                    return redirect()->back()->with('success', 'Data berhasil diubah!');
+                }else{
+                    return redirect()->back()->with('error', 'Data gagal diubah!');
+                }
+            }
         }
 
     }

@@ -19,7 +19,7 @@
                                     <label class="mb-2"><strong>Email</strong></label>
                                     <input type="text" name="email" value="{{$data->email}}" placeholder="Email" name="email" class="form-control">
                                 </div>
-                                @if (Auth::user()->role != 'admin')
+                                
                                     <div class="form-group mb-2">
                                         <label for="phone">Nomor Telpon</label>
                                         <input type="text" name="phone" value="{{$data->phone}}" class="form-control">
@@ -36,28 +36,25 @@
                                         <label for="file">File Foto</label>
                                         <input type="file" name="file" class="form-control">
                                     </div>
-                                    <button class="btn btn-dark fw-bold w-100 mt-3">update profile</button>
-                                @endif
+                              
+                                <button class="btn btn-dark fw-bold w-100 mt-3">update profile</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                @if (Auth::user()->role != 'admin')
-                    <div class="col-lg-4">
-
-                        <div class="card">
-                            <div class="card-header fw-bold">
-                                Logo UMKM 
-                            </div>
-                            <img src="{{asset($data->profile)}}">    
+                <div class="col-lg-4">
+                    
+                    <div class="card">
+                        <div class="card-header fw-bold">
+                            Logo UMKM  
                         </div>
+                        <img src="{{asset($data->profile)}}">    
                     </div>
-                
-                @endif
+                </div>
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ Route('profile.password') }}" enctype="multipart/form-data" method="post">
+                            <form action="{{ Route('profile.password') }}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group mb-2">

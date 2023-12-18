@@ -16,36 +16,38 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-6 mb-3">
-                <div class="card text-light border-0 shadow bg-primary">
-                    <div class="card-body">
-                        <h3>Kategori</h3>
-                        <h3  class="fw-bold"> <i class="fa fa-cube fa-1x"> </i>
-                            {{$countCategory}}+</h3>
-                       
+            @if (Auth::user()->role == 'admin')
+                <div class="col-lg-3 col-6 mb-3">
+                    <div class="card text-light border-0 shadow bg-primary">
+                        <div class="card-body">
+                            <h3>Kategori</h3>
+                            <h3  class="fw-bold"> <i class="fa fa-cube fa-1x"> </i>
+                                {{$countCategory}}+</h3>
+                        
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-6 mb-3">
-                <div class="card text-light border-0 shadow bg-success">
-                    <div class="card-body">
-                        <h3>Slider</h3>
-                        <h3  class="fw-bold"> <i class="fa fa-image fa-1x"> </i>
-                            {{$countSlider}}+</h3>
-                       
+                <div class="col-lg-3 col-6 mb-3">
+                    <div class="card text-light border-0 shadow bg-success">
+                        <div class="card-body">
+                            <h3>Slider</h3>
+                            <h3  class="fw-bold"> <i class="fa fa-image fa-1x"> </i>
+                                {{$countSlider}}+</h3>
+                        
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-6 mb-3">
-                <div class="card text-light border-0 shadow bg-warning">
-                    <div class="card-body">
-                        <h3>Admin</h3>
-                        <h3  class="fw-bold"> <i class="fa fa-user fa-1x"> </i>
-                            {{$adminCount}}+</h3>
-                       
+                <div class="col-lg-3 col-6 mb-3">
+                    <div class="card text-light border-0 shadow bg-warning">
+                        <div class="card-body">
+                            <h3>Admin</h3>
+                            <h3  class="fw-bold"> <i class="fa fa-user fa-1x"> </i>
+                                {{$adminCount}}+</h3>
+                        
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 </section>

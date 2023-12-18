@@ -25,12 +25,18 @@ class LoginController extends Controller
         ]);
 
         $credential = $request->only('email','password');
+      
         if(Auth::attempt($credential))
         {
+            $user = Auth::user();
+            if ($user->status === 'inactive') {
+                throw Valid::withMessages(['message' => 'Maaf, akun Anda tidak aktif.']);
+            }
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
         throw Valid::withMessages(['message' => 'Maaf Email Dan Password Anda Tidak Terdaftar']);
+
     }
 
     public function logout()

@@ -7,10 +7,12 @@
             <div class="row justify-content-center">
                 <div class="card">
                     <div class="card-body">
-                        <button type="button" class="btn btn-dark fw-bold mb-4" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                            Tambah Product
-                        </button>
+                        @if (Auth::user()->role != 'admin')
+                            <button type="button" class="btn btn-dark fw-bold mb-4" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Tambah Product
+                            </button>
+                        @endif
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -60,6 +62,15 @@
                             <div class="form-group mb-3">
                                 <label class="fw-bold">Nama Product</label>
                                 <input type="text" name="name" placeholder="Nama Product" class="form-control">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="fw-bold">Kategori Umkm</label>
+                                <select name="jenis_umkm" class="form-control">
+                                    <option value="">-- Pilih Kategori Umkm --</option>
+                                    @foreach ($umkm as $um)
+                                        <option value="{{$um->id}}">{{$um->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group mb-3">
                                 <label class="fw-bold">Kategori Produk</label>

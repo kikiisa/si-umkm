@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\JenisUmkm;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -20,8 +22,9 @@ class ProductController extends Controller
     public function index()
     {
         $kategori = Category::all();
-        $product = Product::all();
-        return view('backend.product.index', compact('kategori', 'product'));
+        $product = Auth::user()->role != 'admin'? Product::all()->where('user_id',Auth::user()->id) : Product::all();
+        $umkm = JenisUmkm::all();
+        return view('backend.product.index', compact('kategori', 'product','umkm'));
     }
 
     /**
@@ -43,6 +46,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            
             'name' => 'required',
             'image' => 'required|image|mimes:webp,png,jpg,jpeg|max:2048',
             'category_id' => 'required',
@@ -57,6 +61,8 @@ class ProductController extends Controller
         $file->move($this->path,$newName);
         $send = Product::create([
             'uuid' => Str::uuid()->toString(),
+            'user_id' => Auth::user()->id,
+            'jenis_umkm_id' => $request->jenis_umkm,
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'category_id' => $request->category_id,

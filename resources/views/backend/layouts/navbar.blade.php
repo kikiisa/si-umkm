@@ -25,19 +25,25 @@
                         <a class="nav-link" aria-current="page" href="{{Route('product.index')}}"><i class="fa fa-cart-shopping"></i> MASTER
                             PRODUCT</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{Route('category.index')}}"><i class="fa fa-cube"></i> MASTER
-                            KATEGORI</a>
-                    </li>
+                    @if (Auth::user()->role == 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{Route('category.index')}}"><i class="fa fa-cube"></i> MASTER
+                                KATEGORI</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{Route('slider.index')}}"><i class="fa fa-image"></i>
+                                SLIDER</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{Route('setting.index')}}"><i class="fa fa-wrench"></i> PENGATURAN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{Route('user.index')}}"><i class="fa fa-users"></i> MASTER USER</a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{Route('profile')}}"><i class="fa fa-user"></i> PROFILE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{Route('slider.index')}}"><i class="fa fa-image"></i>
-                            SLIDER</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{Route('setting.index')}}"><i class="fa fa-wrench"></i> PENGATURAN</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{Route('login.logout')}}"><i class="fa fa-sign-out" onclick="return confirm('apakah anda yakin ingin keluar ?')"></i> KELUAR</a>

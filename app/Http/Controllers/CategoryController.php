@@ -99,9 +99,7 @@ class CategoryController extends Controller
                 'name' => 'required',
                 'image' => 'required|image|mimes:webp,png,jpg|max:2048'
             ]);
-            if (File::hash($this->path . $data->image)) {
-                File::delete($this->path . $data->image);
-            }
+            File::delete($this->path . $data->image);
             $file = $request->file('image');
             $newName = $file->hashName();
             $file->move(public_path($this->path), $newName);

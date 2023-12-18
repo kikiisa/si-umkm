@@ -1,10 +1,10 @@
 @extends('frontend.layouts.master', ['title' => 'Semua Product'])
 @section('content')
     <section class="product container" style="margin-top: 150px;">
-        <h4>Semua Product</h4>
+        <h4>Product Toko {{$name}}</h4>
         <hr>
-        <div class="row">
-            @foreach ($data as $x)
+        <div class="row justify-content-center">
+            @forelse ($data as $x)
                 <div class="col-lg-4 mb-4">
                     <div class="card">
                         <div class="card-img img-fluid">
@@ -34,7 +34,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="alert alert-danger mt-4">Maaf Data Belum Tersedia</div>
+            @endforelse
             {{$data->links()}}
         </div>
     </section>
